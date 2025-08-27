@@ -3,6 +3,8 @@ import json
 import pickle
 from pathlib import Path
 import random
+import os
+from dotenv import load_dotenv
 
 import numpy as np
 import pandas as pd
@@ -12,9 +14,11 @@ from torch import nn
 from tmdbv3api import TMDb, Movie
 from PIL import Image, ImageDraw, ImageFont
 
+load_dotenv()
+
 # ---- TMDb setup ----
 tmdb = TMDb()
-tmdb.api_key = "9aa945853994178d69aeb6717fe7a128"  # <-- remplace par ta clé TMDb
+tmdb.api_key = os.getenv("TMDB_API_KEY") # <-- remplace par ta clé TMDb
 tmdb.language = 'fr-FR'
 movie_api = Movie()
 
