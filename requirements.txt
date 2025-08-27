@@ -1,0 +1,14 @@
+pandas==2.2.2
+numpy==1.26.4
+scikit-learn==1.5.0
+streamlit==1.36.0
+scikit-surprise==1.1.3
+lightfm==1.17
+tqdm==4.66.4
+tmdbv3api
+
+
+torch
+torchvision
+
+--extra-index-url https://download.pytorch.org/whl/rocm6.4
