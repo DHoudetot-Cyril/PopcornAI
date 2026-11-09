@@ -45,6 +45,7 @@ note(u, f) ≈ ⟨vecteur_u , vecteur_f⟩ + biais_u + biais_f
 | Entraînement | Adam, perte MSE sur la note ramenée entre 0 et 1, précision mixte (AMP) sur GPU, batchs de 16 384 |
 | Sélection | on garde l'époque avec le meilleur **RMSE** en validation |
 | Artefacts | `artifacts/model.pt`, `mappings.pkl`, `config.json` |
+| Prédiction | sigmoïde puis retour à l'échelle 0,5 – 5 (même transformation qu'à l'entraînement) |
 
 ## 🚀 Démarrage rapide
 
@@ -83,7 +84,6 @@ PopcornAI/
 
 ## 🗺️ Pistes d'amélioration
 
-- [ ] Appliquer la même sigmoïde qu'à l'entraînement dans `app.py`, pour afficher la note prédite sur l'échelle 0,5–5
 - [ ] Mesurer la qualité du classement (Precision@k, NDCG) en plus du RMSE
 - [ ] Gérer les nouveaux utilisateurs (*cold start*) à partir de quelques films choisis
 - [ ] Servir le modèle via une petite API et mettre le tout dans Docker

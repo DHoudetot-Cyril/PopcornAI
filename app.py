@@ -111,11 +111,17 @@ def load_movies(movies_csv: str):
     movies = pd.read_csv(movies_csv)  # movieId,title,genres
     return movies
 
+def norm_to_rating(x):
+    # Inverse de rating_to_norm (train.py) : 0..1 -> 0.5..5.0
+    return x * 4.5 + 0.5
+
 def scores_for_user(model, user_index: int, n_items: int, device="cpu"):
     user_tensor = torch.full((n_items,), user_index, dtype=torch.long, device=device)
     item_tensor = torch.arange(n_items, dtype=torch.long, device=device)
     with torch.no_grad():
-        scores = model(user_tensor, item_tensor).clamp(0.5, 5.0).cpu().numpy()
+        # Même transformation qu'à l'entraînement : sigmoïde puis retour à l'échelle des notes
+        raw = model(user_tensor, item_tensor)
+        scores = norm_to_rating(torch.sigmoid(raw)).cpu().numpy()
     return scores
 
 def main():
